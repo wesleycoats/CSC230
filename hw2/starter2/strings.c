@@ -9,6 +9,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define ESC 27
+#define BRACKET 91
+#define THREE 51
+#define FOUR 52
+#define M 109
+#define ZERO 48
+#define ONE 49
+#define SINGLEQUOTE 39
+#define DOUBLEQUOTE 34
 
 /**
   This function switches the print color to blue then back to black after reading and printing and single quoted string
@@ -17,13 +26,13 @@ void markSingle()
 {
   char c;
   //Change color to blue
-  printf("%c%c%c%c%c",27,91,51,52,109);
-  putchar(39);
+  printf("%c%c%c%c%c",ESC,BRACKET,THREE,FOUR,M);
+  putchar(SINGLEQUOTE);
   do {
     c = getchar();
     if(c == EOF) {
       //Change color back to black
-      printf("%c%c%c%c",27,91,48,109);
+      printf("%c%c%c%c",ESC,BRACKET,ZERO,M);
       exit(100);
     }
     if(c == '/') {
@@ -31,10 +40,10 @@ void markSingle()
     }
     putchar(c);
   }
-  while (c != 39);
-  if(c == 39) {
+  while (c != SINGLEQUOTE);
+  if(c == SINGLEQUOTE) {
     //Change color back to black
-    printf("%c%c%c%c", 27,91,48,109);
+    printf("%c%c%c%c",ESC,BRACKET,ZERO,M);
   }
 }
 
@@ -44,22 +53,22 @@ void markSingle()
 void markDouble()
 {
   //Change color to red
-  printf("%c%c%c%c%c", 27,91,51,49,109);
+  printf("%c%c%c%c%c", ESC,BRACKET,THREE,ONE,M);
   char c;
-  putchar(34);
+  putchar(DOUBLEQUOTE);
   do {
     c = getchar();
     if(c == EOF) {
       //Change color back to black
-      printf("%c%c%c%c",27,91,48,109);
+      printf("%c%c%c%c",ESC,BRACKET,ZERO,M);
       exit(100);
     }
     putchar(c);
   }
-  while(c != 34);
-  if(c == 34) {
+  while(c != DOUBLEQUOTE);
+  if(c == DOUBLEQUOTE) {
     //Change color back to black
-    printf("%c%c%c%c", 27,91,48,109);
+    printf("%c%c%c%c",ESC,BRACKET,ZERO,M);
   }
 }
 
