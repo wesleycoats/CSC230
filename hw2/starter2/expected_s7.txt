@@ -1,0 +1,14 @@
+This input is for [31m"Extra Credit"[0m,
+Where you can have strings like [31m"This \" one"[0m,
+containing escaped quote characters.
+
+However, [31m"this\\"[0m would still be considered a
+string with a starting and ending quote.  Here,
+the first backslash says that the second
+backslash should be taken literally, so the second
+one [31m"isn't"[0m interpreted as an escape for the closing
+quote.
+
+The same goes for single quotes.  [34m'this \' quote'[0m is
+escapted, but [34m'this\\'[0m one still marks the end of the
+string.

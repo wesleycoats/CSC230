@@ -1,0 +1,14 @@
+This input is for "Extra Credit",
+Where you can have strings like "This \" one",
+containing escaped quote characters.
+
+However, "this\\" would still be considered a
+string with a starting and ending quote.  Here,
+the first backslash says that the second
+backslash should be taken literally, so the second
+one "isn't" interpreted as an escape for the closing
+quote.
+
+The same goes for single quotes.  'this \' quote' is
+escapted, but 'this\\' one still marks the end of the
+string.

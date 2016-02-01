@@ -1,0 +1,5 @@
+This is plain text.
+"This is a double-quoted string."
+'This is a single-quoted string.'
+More plain text.
+Just one "word" in quotes.

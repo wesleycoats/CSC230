@@ -1,0 +1,5 @@
+This is plain text.
+[31m"This is a double-quoted string."[0m
+[34m'This is a single-quoted string.'[0m
+More plain text.
+Just one [31m"word"[0m in quotes.

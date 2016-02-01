@@ -1,0 +1,2 @@
+This is a string "that starts and ends".
+But "this string doesn't have an ending quote.

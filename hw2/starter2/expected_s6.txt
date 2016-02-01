@@ -1,0 +1,3 @@
+This is a string [31m"that starts and ends"[0m.
+But [31m"this string doesn't have an ending quote.
+[0m

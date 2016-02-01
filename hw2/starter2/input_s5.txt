@@ -1,0 +1,5 @@
+Inside a double-quoted string, "single quotes
+don't matter"
+Likewise, inside a single-quoted
+string 'double quotes like this " do
+not matter'.

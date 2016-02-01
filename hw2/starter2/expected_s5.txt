@@ -1,0 +1,5 @@
+Inside a double-quoted string, [31m"single quotes
+don't matter"[0m
+Likewise, inside a single-quoted
+string [34m'double quotes like this " do
+not matter'[0m.
