@@ -1,0 +1,109 @@
+q b u g i y x a z 
+r t e s t u n g y 
+a b r a n w z u a 
+h n g i s e d b r 
+c t l a k s a t r 
+c o m p u t e r a 
+x t p r o g r a m 
+r e t n i o p q u 
+n n s c i e n c e 
+Word (or ! to quit)? q b u g i y x a z 
+r t e s t u n g y 
+a b r a n w z u a 
+h n g i s e d b r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t p r o g r a m 
+r e t n i o p q u 
+n n s c i e n c e 
+Word (or ! to quit)? q b u g i y x a z 
+r t e s t u n g y 
+a b r a n w z u a 
+h n g i s e d b r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t p r o g r a m 
+r e t n i o p q u 
+n n S C I E N C E 
+Word (or ! to quit)? q b u g i y x a z 
+r t e s t u n g y 
+a b r a n w z u a 
+h n g i s e d b r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t P R O G R A M 
+r e t n i o p q u 
+n n S C I E N C E 
+Word (or ! to quit)? q b u g i y x a z 
+r t e s t u n g y 
+a b r a n w z u a 
+h n g i s e d b r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y x a z 
+r t e s t u n G y 
+a b r a n w z U a 
+h n g i s e d B r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y x a z 
+r T E S T u n G y 
+a b r a n w z U a 
+h n g i s e d B r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y x a z 
+r T E S T u n G y 
+a b r a n w z U a 
+h N G I S E D B r 
+c t l a k s a t r 
+C O M P U T E R a 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y x a z 
+r T E S T u n G y 
+a b r a n w z U a 
+h N G I S E D B r 
+c t l a K S A T r 
+C O M P U T E R a 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y X a z 
+r T E S T U n G y 
+a b r a N w z U a 
+h N G I S E D B r 
+c t L a K S A T r 
+C O M P U T E R a 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y X a z 
+r T E S T U n G Y 
+a b r a N w z U A 
+h N G I S E D B R 
+c t L a K S A T R 
+C O M P U T E R A 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? q B U G i y X a z 
+R T E S T U n G Y 
+A b r a N w z U A 
+H N G I S E D B R 
+C t L a K S A T R 
+C O M P U T E R A 
+x t P R O G R A M 
+R E T N I O P q u 
+n n S C I E N C E 
+Word (or ! to quit)? 

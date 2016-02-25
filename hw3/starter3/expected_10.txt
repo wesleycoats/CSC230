@@ -1,0 +1,2 @@
+Can't open file: ws_10.txt
+usage: wordsearch <grid_file>

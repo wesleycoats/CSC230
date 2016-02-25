@@ -1,0 +1,190 @@
+        -:    0:Source:search.c
+        -:    0:Graph:search_t.gcno
+        -:    0:Data:search_t.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:/**
+        -:    2:  @file search.c
+        -:    3:  @author Wesley Coats wrcoats
+        -:    4:  
+        -:    5:  Responsible for finding words in the wordsearch grid
+        -:    6:*/
+        -:    7:
+        -:    8:#include <ctype.h>
+        -:    9:#include <stdlib.h>
+        -:   10:#include <stdio.h>
+        -:   11:#include <string.h>
+        -:   12:#include "search.h"
+        -:   13:
+        -:   14:#define MAX_SIZE 9
+        -:   15:#define RIGHT 0
+        -:   16:#define UP_RIGHT 1
+        -:   17:#define UP 2
+        -:   18:#define UP_LEFT 3
+        -:   19:#define LEFT 4
+        -:   20:#define DOWN_LEFT 5
+        -:   21:#define DOWN 6
+        -:   22:#define DOWN_RIGHT 7
+        -:   23:
+        1:   24:int find(char word[], unsigned char grid[MAX_SIZE][MAX_SIZE])
+        -:   25:{
+        1:   26:  int result = 0;
+       10:   27:  for(int i = 0; i < MAX_SIZE; i++) {
+       90:   28:    for (int j = 0; j < MAX_SIZE; j++) {
+      729:   29:      for(int k = 0; k < MAX_SIZE - 1; k++) {
+      648:   30:        result = matches(word, grid, i, j, k);
+      648:   31:        if(result == 1) {
+        1:   32:          int newi = i;
+        1:   33:          int newj = j;
+        1:   34:          int m = 0;
+       10:   35:          while(word[m]) {
+        8:   36:            if(k == RIGHT) {
+        8:   37:              grid[newi][newj] = toupper(grid[newi][newj]);
+        8:   38:              newj++; //right one
+        -:   39:            }
+    #####:   40:            else if(k == UP_RIGHT) {
+    #####:   41:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   42:              newi--; //up one
+    #####:   43:              newj++; //right one
+        -:   44:            }
+    #####:   45:            else if(k == UP) {
+    #####:   46:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   47:              newi--; //up one
+        -:   48:            }
+    #####:   49:            else if(k == UP_LEFT) {
+    #####:   50:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   51:              newi--; //up one
+    #####:   52:              newj--; //left one
+        -:   53:            }
+    #####:   54:            else if(k == LEFT) {
+    #####:   55:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   56:              newj--; //left one
+        -:   57:            }
+    #####:   58:            else if(k == DOWN_LEFT) {
+    #####:   59:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   60:              newi++; //down one
+    #####:   61:              newj--; //left one
+        -:   62:            }
+    #####:   63:            else if(k == DOWN) {
+    #####:   64:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   65:              newi++; //down one
+        -:   66:            }
+    #####:   67:            else if(k == DOWN_RIGHT) {
+    #####:   68:              grid[newi][newj] = toupper(grid[newi][newj]);
+    #####:   69:              newi++; //down one
+    #####:   70:              newj++; //right one
+        -:   71:            }
+        8:   72:            m++;  
+        -:   73:          }
+        -:   74:        }
+        -:   75:      }
+        -:   76:    }
+        -:   77:  }
+        1:   78:  return result;
+        -:   79:}
+        -:   80:
+      650:   81:int matches(char word[], unsigned char grid[MAX_SIZE][MAX_SIZE], int row, int col, int direction)
+        -:   82:{
+      650:   83:  int answer = 0;
+      650:   84:  int wordLength = strlen(word);
+        -:   85:  
+        -:   86:  //If illegal direction
+      650:   87:  if(direction < RIGHT || direction > DOWN_RIGHT) {
+        1:   88:    answer = -1;
+        -:   89:  }
+        -:   90:  //Running past edge of wordsearch matrix
+      650:   91:  if(MAX_SIZE - row > wordLength) {
+       73:   92:    answer = -1;
+        -:   93:  }
+      650:   94:  if(MAX_SIZE - col > wordLength) {
+       74:   95:    answer = -1;
+        -:   96:  }
+        -:   97:  
+        -:   98:  //for(int i = row; i < MAX_SIZE; i++) {
+        -:   99:    //for(int j = col; j < MAX_SIZE; j++) {
+      650:  100:      int newRow = row;
+      650:  101:      int newCol = col;
+      650:  102:      int n = 0;
+     1356:  103:      while(word[n]) {
+      703:  104:        if(direction == RIGHT) {
+       99:  105:          if(word[n] == tolower(grid[newRow][newCol])) {
+       19:  106:            newCol++; //right one
+       19:  107:            answer = 1;
+        -:  108:          }
+        -:  109:          else {
+       80:  110:            return 0;
+        -:  111:          }
+        -:  112:        }
+      604:  113:        else if(direction == UP_RIGHT) {
+       85:  114:          if(word[n] == tolower(grid[newRow][newCol])) {
+        4:  115:            newRow--; //up one
+        4:  116:            newCol++; //right one
+        4:  117:            answer = 1;
+        -:  118:          }
+        -:  119:          else {
+       81:  120:            return 0;
+        -:  121:          }
+        -:  122:        }
+      519:  123:        else if(direction == UP) {
+       85:  124:          if(word[n] == tolower(grid[newRow][newCol])) {
+        4:  125:            newRow--; //up one
+        4:  126:            answer = 1;
+        -:  127:          }
+        -:  128:          else {
+       81:  129:            return 0;
+        -:  130:          }
+        -:  131:        }
+      434:  132:        else if(direction == UP_LEFT) {
+       85:  133:          if(word[n] == tolower(grid[newRow][newCol])) {
+        4:  134:            newRow--; //up one
+        4:  135:            newCol--; //left one
+        4:  136:            answer = 1;
+        -:  137:          }
+        -:  138:          else {
+       81:  139:            return 0;
+        -:  140:          }
+        -:  141:        }
+      349:  142:        else if(direction == LEFT) {
+       85:  143:          if(word[n] == tolower(grid[newRow][newCol])) {
+        4:  144:            newCol--; //left one
+        4:  145:            answer = 1;
+        -:  146:          }
+        -:  147:          else {
+       81:  148:            return 0;
+        -:  149:          }
+        -:  150:        }
+      264:  151:        else if(direction == DOWN_LEFT) {
+       85:  152:          if(word[n] == tolower(grid[newRow][newCol])) {
+        4:  153:            newRow++; //down one
+        4:  154:            newCol--; //left one
+        4:  155:            answer = 1;
+        -:  156:          }
+        -:  157:          else {
+       81:  158:            return 0;
+        -:  159:          }
+        -:  160:        }
+      179:  161:        else if(direction == DOWN) {
+       85:  162:          if(word[n] == tolower(grid[newRow][newCol])) {
+        4:  163:            newRow++; //down one
+        4:  164:            answer = 1;
+        -:  165:          }
+        -:  166:          else {
+       81:  167:            return 0;
+        -:  168:          }
+        -:  169:        }
+       94:  170:        else if(direction == DOWN_RIGHT) {
+       86:  171:          if(word[n] == tolower(grid[newRow][newCol])) {
+        5:  172:            newRow++; //down one
+        5:  173:            newCol++; //right one
+        5:  174:            answer = 1;
+        -:  175:          }
+        -:  176:          else {
+       81:  177:            return 0;
+        -:  178:          }
+        -:  179:        }
+       56:  180:        n++;
+        -:  181:      }
+        -:  182:    //}
+        -:  183:  //}
+        3:  184:  return answer;
+        -:  185:}

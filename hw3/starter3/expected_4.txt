@@ -1,0 +1,19 @@
+q s m v i y x a z 
+c t e s t u n g y 
+h b r a n w z u a 
+a n g i s e d b r 
+r t l a k s a t r 
+c o m p u t e r a 
+x t p r o g r a m 
+r e t n i o p q u 
+n n s c i e n c e 
+Word (or ! to quit)? q s m v i y x a z 
+C t e s t u n g y 
+H b r a n w z u a 
+A n g i s e d b r 
+R t l a k s a t r 
+c o m p u t e r a 
+x t p r o g r a m 
+r e t n i o p q u 
+n n s c i e n c e 
+Word (or ! to quit)? 

@@ -1,0 +1,1 @@
+usage: wordsearch <grid_file>
