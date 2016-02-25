@@ -16,3 +16,4 @@ search_test: search.c search_test.c
 clean:
 	rm -f search.o
 	rm -f output.txt
+	rm -f wordsearch.o

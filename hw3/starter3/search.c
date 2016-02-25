@@ -2,7 +2,7 @@
   @file search.c
   @author Wesley Coats wrcoats
   
-  Responsible for finding words in the wordsearch grid
+  Responsible for finding words in the wordsearch grid and updating them to all caps
 */
 
 #include <ctype.h>
@@ -21,6 +21,13 @@
 #define DOWN 6
 #define DOWN_RIGHT 7
 
+/**
+  Finds the target word in the wordsearch and updates it to all caps if it is found
+  
+  @param word the word being searched for
+  @param grid the wordsearch grid
+  @return 1 if the word is found or 0 if it is not found
+*/
 int find(char word[], unsigned char grid[MAX_SIZE][MAX_SIZE])
 {
   int result = 0;
@@ -78,6 +85,16 @@ int find(char word[], unsigned char grid[MAX_SIZE][MAX_SIZE])
   return result;
 }
 
+/**
+  Starts at intersection of row and column and looks in specified direction for the word
+  
+  @param word the word being searched for
+  @param grid the wordsearch grid
+  @param row the row being passed in
+  @param col the col being passed in
+  @param direction the direction being searched
+  @return 1 if word is found, 0 if word is not found
+*/
 int matches(char word[], unsigned char grid[MAX_SIZE][MAX_SIZE], int row, int col, int direction)
 {
   int answer = 0;
@@ -94,92 +111,87 @@ int matches(char word[], unsigned char grid[MAX_SIZE][MAX_SIZE], int row, int co
   if(MAX_SIZE - col > wordLength) {
     answer = -1;
   }
-  
-  //for(int i = row; i < MAX_SIZE; i++) {
-    //for(int j = col; j < MAX_SIZE; j++) {
-      int newRow = row;
-      int newCol = col;
-      int n = 0;
-      while(word[n]) {
-        if(direction == RIGHT) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newCol++; //right one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == UP_RIGHT) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newRow--; //up one
-            newCol++; //right one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == UP) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newRow--; //up one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == UP_LEFT) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newRow--; //up one
-            newCol--; //left one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == LEFT) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newCol--; //left one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == DOWN_LEFT) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newRow++; //down one
-            newCol--; //left one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == DOWN) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newRow++; //down one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        else if(direction == DOWN_RIGHT) {
-          if(word[n] == tolower(grid[newRow][newCol])) {
-            newRow++; //down one
-            newCol++; //right one
-            answer = 1;
-          }
-          else {
-            return 0;
-          }
-        }
-        n++;
+  int newRow = row;
+  int newCol = col;
+  int n = 0;
+  while(word[n]) {
+    if(direction == RIGHT) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newCol++; //right one
+        answer = 1;
       }
-    //}
-  //}
+      else {
+        return 0;
+      }
+    }
+    else if(direction == UP_RIGHT) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newRow--; //up one
+        newCol++; //right one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    else if(direction == UP) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newRow--; //up one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    else if(direction == UP_LEFT) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newRow--; //up one
+        newCol--; //left one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    else if(direction == LEFT) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newCol--; //left one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    else if(direction == DOWN_LEFT) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newRow++; //down one
+        newCol--; //left one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    else if(direction == DOWN) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newRow++; //down one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    else if(direction == DOWN_RIGHT) {
+      if(word[n] == tolower(grid[newRow][newCol])) {
+        newRow++; //down one
+        newCol++; //right one
+        answer = 1;
+      }
+      else {
+        return 0;
+      }
+    }
+    n++;
+  }
   return answer;
 }

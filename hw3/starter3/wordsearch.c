@@ -14,6 +14,12 @@
 
 #define MAX_SIZE 9
 
+/**
+  Main function reads wordsearch grid file, prompting user for words to search for, and calling functions to perform the search
+  
+  @param argc the number of command line arguments
+  @param argv the array corresponding to each command line argument
+*/
 int main(int argc, char *argv[])
 {
   if(argc != 2) {
@@ -28,14 +34,16 @@ int main(int argc, char *argv[])
   }
   //Read wordsearch file, store in multidimensional array
   char letter;
+  //int counter = 0; 
   unsigned char wordsearchGrid[MAX_SIZE][MAX_SIZE];
   for(int i = 0; i < MAX_SIZE; i++) {
     for (int j = 0; j < MAX_SIZE; j++) {
       fscanf(ip, "%c ", &letter);
+      //counter++;
         if(!(isalpha(letter))) {
-          fprintf(stderr, "Improperly formatted file.\n");
+          fprintf(stdout, "Improperly formatted file.\n");
           exit(EXIT_FAILURE);
-        }
+        }  
         if(isupper(letter)) {
           letter = tolower(letter);
         }
