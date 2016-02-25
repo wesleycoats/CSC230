@@ -13,6 +13,7 @@
 #include "search.h"
 
 #define MAX_SIZE 9
+#define CORRECT 81
 
 /**
   Main function reads wordsearch grid file, prompting user for words to search for, and calling functions to perform the search
@@ -23,7 +24,7 @@
 int main(int argc, char *argv[])
 {
   if(argc != 2) {
-    fprintf(stderr, "usage: wordsearch <grid_file>\n");
+    fprintf(stdout, "usage: wordsearch <grid_file>\n");
     exit(1);
   }
   FILE *ip = fopen(argv[1], "r");
@@ -34,21 +35,36 @@ int main(int argc, char *argv[])
   }
   //Read wordsearch file, store in multidimensional array
   char letter;
-  //int counter = 0; 
   unsigned char wordsearchGrid[MAX_SIZE][MAX_SIZE];
   for(int i = 0; i < MAX_SIZE; i++) {
     for (int j = 0; j < MAX_SIZE; j++) {
       fscanf(ip, "%c ", &letter);
-      //counter++;
-        if(!(isalpha(letter))) {
-          fprintf(stdout, "Improperly formatted file.\n");
-          exit(EXIT_FAILURE);
-        }  
-        if(isupper(letter)) {
-          letter = tolower(letter);
-        }
-        wordsearchGrid[i][j] = letter;
+      if(!(isalpha(letter))) {
+        fprintf(stdout, "Improperly formatted file.\n");
+        exit(EXIT_FAILURE);
+      }  
+      if(isupper(letter)) {
+        letter = tolower(letter);
+      }
+      wordsearchGrid[i][j] = letter;
     }
+  }
+  
+  int counter = 0;
+  int spaceCounter = 0;
+  FILE *cp = fopen(argv[1], "r");
+  char check;
+  while(fscanf(cp, "%c", &check) == 1) {
+    if(isalpha(check)) {
+      counter++;
+    }
+    else if(check == ' ') {
+      spaceCounter++;
+    }
+  }
+  if(counter != CORRECT || spaceCounter != CORRECT) {
+    fprintf(stdout, "Improperly formatted file.\n");
+    exit(EXIT_FAILURE);
   }
   
   //Print wordsearch
