@@ -29,10 +29,10 @@
   @param int *lengthOfDictionary the number of lines in the dictionary file 
   @return 1 if word is in dictionary 0 if word is not found in dictionary
 */
-int isWordInDictionary(char **dictionaryFile, char *wordToCheck, int *lengthOfDictionary)
+int isWordInDictionary(char **dictionaryFile, char *wordToCheck, int lengthOfDictionary)
 {
-  for(int i = 0; i < *lengthOfDictionary; i++) {
-    if(strcmp(dictionaryFile[i], wordToCheck) == 0) {
+  for(int i = 0; i < lengthOfDictionary; i++) {
+    if(strcmp(wordToCheck, dictionaryFile[i]) == 0) {
       return 1;
     }
   }
@@ -44,15 +44,32 @@ int isWordInDictionary(char **dictionaryFile, char *wordToCheck, int *lengthOfDi
   
   @param char **dictionary the dictionary file
   @param char *wordToAdd the word being added to the dictionary
-  @param int *dictionaryLength the length of the dictionary file
+  @param int *dictionaryCount the length of the dictionary file
 */
-void addWordToDictionary(char **dictionary, char *wordToAdd, int *dictionaryLength)
+char **addWordToDictionary(char **dictionary, char *wordToAdd, int *dictionaryCount)
 {
-  //Allocate space for new size of dictionary
-  dictionary = (char **)realloc(dictionary, (*dictionaryLength + 1) * sizeof(char *));
-  dictionary[*dictionaryLength] = (char *)malloc((strlen(wordToAdd) * sizeof(char)) +1);
+  //Allocate space for new dictionary
+  char **newDictionary = (char **)malloc((*dictionaryCount + 1) * sizeof(char *));
+  for(int i = 0; i < *dictionaryCount; i++) {
+    newDictionary[i] = (char *)malloc((strlen(dictionary[i]) * sizeof(char)) + 1);
+    newDictionary[i][strlen(dictionary[i])] = '\0';
+  }
   //Copy over the word to dictionary
-  strcpy(dictionary[*dictionaryLength], wordToAdd);
+  newDictionary[*dictionaryCount] = (char *)malloc((strlen(wordToAdd) * sizeof(char)) + 1);
+  newDictionary[*dictionaryCount] = wordToAdd;
+  newDictionary[*dictionaryCount][strlen(wordToAdd)] = '\0';
+  
+  //Free memory
+  for(int j = 0; j < *dictionaryCount; j++) {
+    free(dictionary[j]);
+  }
+  free(dictionary);
+  
+  //Change pointer and increment size;
+  dictionary = newDictionary;
+  *(dictionaryCount)++;
+  
+  return dictionary;
 } 
 
 /**
@@ -62,7 +79,7 @@ void addWordToDictionary(char **dictionary, char *wordToAdd, int *dictionaryLeng
   @param char *replacement the input being inserted into the current line
   @param char *partBeingReplaced the target word being replaced
 */
-char* replaceWord(char *currentLine, char *replacement, char *partBeingReplaced)
+char *replaceWord(char *currentLine, char *replacement, char *partBeingReplaced)
 {
   //Allocate memory for new line with replacement
   char *newLine = malloc(strlen(currentLine) + strlen(replacement) - strlen(partBeingReplaced) + 1);
@@ -86,6 +103,7 @@ char* replaceWord(char *currentLine, char *replacement, char *partBeingReplaced)
     }
   }
   *hold = 0;
+  
   return newLine;
 }  
  
@@ -213,7 +231,8 @@ int main(int argc, char *argv[])
       }
       
       //Check to see if word is in dictionary
-      int check = isWordInDictionary(dictionary, currentWord, dictionaryCount);
+      int check = 0;
+      check = isWordInDictionary(dictionary, currentWord, *dictionaryCount);
      
       //Word is in dictionary
       if(check == 1) {
@@ -330,12 +349,15 @@ int main(int argc, char *argv[])
         char *response = (char *)malloc(MAX_SIZE * sizeof(char));
         reprompt:
         printf("(r)eplace, (a)dd, (n)ext or (q)uit: ");
-        scanf("%s", response);
-        char c;
-        while(c != '\n') {
-          c = getchar();
-        }
+        fgets(response, MAX_SIZE, stdin);
+        response[strlen(response)] = '\0';
+        //char c;
+        // while(c != '\n') {
+          // c = getchar();
+        // }
+        
         //q for quit
+        //printf("%s", response);
         if(response[0] == 'q') {
           printf("Discarding changes\n");
           exit(1);
@@ -346,12 +368,15 @@ int main(int argc, char *argv[])
         }
         //a for add to dictionary
         else if(response[0] == 'a') {
-          addWordToDictionary(dictionary, currentWord, dictionaryCount);
+          dictionary = addWordToDictionary(dictionary, currentWord, dictionaryCount);
         }
         //r for replace
         else if(response[0] == 'r') {
-          char *replacement = response + 1;
-          spellFile[i] = replaceWord(currentLine, replacement, currentWord);
+          //Save replacement line
+          char *replacement = response + 2;
+          //Add null character to end
+          replacement[strlen(replacement) - 1] = '\0';
+          strcpy(spellFile[i], replaceWord(currentLine, replacement, currentWord));
         }
         //other input
         else {
@@ -362,37 +387,32 @@ int main(int argc, char *argv[])
       }
       free(currentWord);
   }
+  
   //Backup the file
   printf("Spellcheck complete.\n");
-  //int check;
-  //char *oldFile = argv[1];
-  //char *bak = ".bak";
-  //char *backupFile = strcat(oldFile, bak);
-  //check = rename(oldFile, backupFile);
-  //printf("Backing up %s to %s\n", argv[1], backupFile);
-  //FILE *wp = fopen(argv[1], "w");
-  //for(int w = 0; w < *spellFileCount; w++) {
-    //fprintf(wp, "%s\n", spellFile[w]);
-  //}
-  //printf("Writing updated %s\n", argv[1]);
-  
+  int check;
+  char *ogFile = (char *)malloc((strlen(argv[1])) * sizeof(char));
+  strcpy(ogFile, argv[1]);
+  char *backupFile = (char *)malloc((strlen(argv[1])) * sizeof(char));
+  strcpy(backupFile, argv[1]);
   char *bak = ".bak";
-  char *backupFile = strcat(argv[1], bak);
-  
-  FILE *op = fopen(argv[1], "r");
-  FILE *bp = fopen(backupFile, "w");
-  
-  printf("%s\n", argv[1]);
-  printf("%s\n", bak);
-  printf("%s\n", backupFile);
-  
-  //fclose(wp);
+  backupFile = strcat(backupFile, bak);
+  check = rename(ogFile, backupFile);
+  printf("Backing up %s to %s\n", ogFile, backupFile);
+  FILE *wp = fopen(argv[1], "w");
+  for(int w = 0; w < *spellFileCount; w++) {
+    fprintf(wp, "%s\n", spellFile[w]);
+  }
+  printf("Writing updated %s\n", argv[1]);
  
   //Close other files
+  fclose(wp);
   fclose(sp);
   fclose(dp);
   
   //Free memory
+  free(ogFile);
+  free(backupFile);
   freeLines(spellFile, *spellFileCount);
   freeLines(dictionary, *dictionaryCount);
   

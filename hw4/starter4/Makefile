@@ -14,3 +14,5 @@ clean:
 	rm -f text.o
 	rm -f spellcheck.o
 	rm -f output.txt
+	rm -f spellcheck
+	rm -f text
