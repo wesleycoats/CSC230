@@ -1,0 +1,1 @@
+usage: crypt <e|d> <key1> <key2> <inputfile> <outputfile>
